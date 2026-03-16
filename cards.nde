@@ -1,5 +1,5 @@
 ; ============================================================
-; cards.nde  —  v0.1
+; cards.nde  —  Fixed version
 ; Spreadsheet columns:
 ;   Name | Game Text | Flavor Text | Tag 1 | Tag 2 |
 ;   Tag 3 | Tag 4 | Type | Hyperlink
@@ -20,7 +20,6 @@ IMAGE = [all], [Hyperlink], 0.3, 0.65, 5.75, 4.3, 0, CN
 ; ============================================================
 ; FRAME OVERLAY — full card, drawn on top of illustration.
 ; N flag = use PNG alpha transparency channel.
-; No quotes needed around the filename (no spaces).
 ; ============================================================
 IF = [Type] = Basic
   IMAGE = [all], frame_basic.png, 0, 0, 6.35, 8.89, 0, N
@@ -34,42 +33,44 @@ ENDIF
 
 ; ============================================================
 ; CARD NAME — inside the gold banner at top
-; T flag = transparent font background (lets frame show through)
+; Left aligned, constrained width to avoid overlapping tags
 ; ============================================================
 FONT = Arial, 13, BT, #FFFFFF
-TEXT = [all], [Name], 0.3, 0.1, 5.75, 0.55, center, center
+TEXT = [all], [Name], 0.45, 0.15, 3.5, 0.6, left, center
 
 ; ============================================================
 ; GAME TEXT — inside the large text box
-; wwtop = word-wrap, anchored to top of rectangle
+; Shifted Y to 5.4 so it sits inside the gold box
 ; ============================================================
 FONT = Arial, 10, T, #FFFFFF
-TEXT = [all], [Game Text], 0.45, 5.2, 5.45, 2.2, left, wwtop
+TEXT = [all], [Game Text], 0.45, 5.4, 5.45, 2.6, left, wwtop
 
 ; ============================================================
 ; FLAVOR TEXT — italic, below game text, only if non-empty
+; Shifted down slightly to accommodate game text
 ; ============================================================
 IF = [Flavor Text] <> ""
   FONT = Arial, 9, IT, #CCCCCC
-  TEXT = [all], [Flavor Text], 0.45, 7.2, 5.45, 0.65, left, wwtop
+  TEXT = [all], [Flavor Text], 0.45, 7.4, 5.45, 0.65, left, wwtop
 ENDIF
 
 ; ============================================================
 ; TYPE — bottom bar
 ; ============================================================
 FONT = Arial, 11, BT, #FFFFFF
-TEXT = [all], [Type], 0, 8.22, 6.35, 0.55, center, center
+TEXT = [all], [Type], 0, 8.25, 6.35, 0.5, center, center
 
 ; ============================================================
 ; TAG ICONS — upper right, Tag 1 rightmost
+; Positions aligned with the circular cutouts in the frame
 ; ============================================================
-[tag_y] = 0.12
+[tag_y] = 0.22
 [tag_w] = 0.45
 [tag_h] = 0.45
-[tag_x1] = 5.75
-[tag_x2] = 5.2
-[tag_x3] = 4.65
-[tag_x4] = 4.1
+[tag_x1] = 5.55
+[tag_x2] = 5.05
+[tag_x3] = 4.55
+[tag_x4] = 4.05
 
 ; --- Tag 1 ---
 IF = [Tag 1] = bow
