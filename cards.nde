@@ -19,18 +19,26 @@ LINK = cards.xlsx
 [all] = 1-{(Name)}
 
 ; ============================================================
-; CARD ART  — upper portion, cropped to fill
-; Adjust height (5.0) to match where your frame's text
-; area begins
+; CARD ILLUSTRATION  — upper center, cropped to fit
+; Adjust y, width, height to match the window in your frame art
 ; ============================================================
-IMAGE = [all], [Hyperlink], 0, 0, 6.35, 5.0, 0, CN
+IMAGE = [all], [Hyperlink], 0, 0, 6.35, 5.5, 0, CN
 
 ; ============================================================
-; FRAME  — static, same for all cards, exact card size
-; No flag needed — default stretches to fill exactly
-; Replace "frame.png" with your actual filename
+; FRAME OVERLAY  — type-specific, exact card size, PNG transparency
+; Drawn on top of the illustration
 ; ============================================================
-IMAGE = [all], "frame.png", 0, 0, 6.35, 8.89, 0, N
+IF = [Type] = Basic
+  IMAGE = [all], frame_basic.png, 0, 0, 6.35, 8.89, 0, N
+ENDIF
+
+IF = [Type] = Rare
+  IMAGE = [all], frame_rare.png, 0, 0, 6.35, 8.89, 0, N
+ENDIF
+
+IF = [Type] = Instant
+  IMAGE = [all], frame_instant.png, 0, 0, 6.35, 8.89, 0, N
+ENDIF
 
 ; ============================================================
 ; CARD NAME  — top left, white, bold
