@@ -24,7 +24,7 @@ LINK = cards.xlsx
 ; ============================================================
 [img_]             = blank.png
 [img_bow]          = bow.png
-[img_finese]       = finese.png
+[img_finesse]       = finesse.png
 [img_fire]         = fire.png
 [img_healing]      = healing.png
 [img_ice]          = ice.png
@@ -47,7 +47,7 @@ LINK = cards.xlsx
 ; ============================================================
 ; CARD ILLUSTRATION
 ; ============================================================
-IMAGE = [all], [Hyperlink], 0.05, 0.26, 2.4, 2, 0, CN
+IMAGE = [all], [Hyperlink], 0.05, 0.35, 2.4, 1.75, 0, CN
 
 ; ============================================================
 ; FRAME OVERLAY
