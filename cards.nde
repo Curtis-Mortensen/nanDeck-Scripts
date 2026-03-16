@@ -1,181 +1,93 @@
-; ============================================================
-; cards.nde  —  Fixed version
-; Spreadsheet columns:
-;   Name | Game Text | Flavor Text | Tag 1 | Tag 2 |
-;   Tag 3 | Tag 4 | Type | Hyperlink
-; ============================================================
+UNIT = INCH
 
-CARDSIZE = 6.35, 8.89
-PAGE = 21, 29.7, PORTRAIT, HV
+CARDSIZE = 2.5, 3.5
+PAGE = 8.5, 11, PORTRAIT, HV
 LINK = cards.xlsx
 
 [all] = 1-{(Name)}
 
 ; ============================================================
-; CARD ILLUSTRATION — fills the window in the frame
-; CN = Crop to fill (C) + PNG transparency (N)
+; Pre-assign spaced column names to clean labels
+; so they can be used safely inside quoted strings
 ; ============================================================
-IMAGE = [all], [Hyperlink], 0.3, 0.65, 5.75, 4.3, 0, CN
+[tag1] = [Tag 1]
+[tag2] = [Tag 2]
+[tag3] = [Tag 3]
+[tag4] = [Tag 4]
 
 ; ============================================================
-; FRAME OVERLAY — full card, drawn on top of illustration.
-; N flag = use PNG alpha transparency channel.
+; CARD ILLUSTRATION — fills the upper window in the frame
+; Approx window: x=0.12, y=0.26, w=2.26, h=1.7
+; ============================================================
+IMAGE = [all], [Hyperlink], 0.12, 0.26, 2.26, 1.7, 0, CN
+
+; ============================================================
+; FRAME OVERLAY — full card, PNG with transparency
+; Drawn on top of illustration
 ; ============================================================
 IF = [Type] = Basic
-  IMAGE = [all], frame_basic.png, 0, 0, 6.35, 8.89, 0, N
+  IMAGE = [all], frame_basic.png, 0, 0, 2.5, 3.5, 0, N
 ENDIF
+
 IF = [Type] = Rare
-  IMAGE = [all], frame_rare.png, 0, 0, 6.35, 8.89, 0, N
+  IMAGE = [all], frame_rare.png, 0, 0, 2.5, 3.5, 0, N
 ENDIF
+
 IF = [Type] = Instant
-  IMAGE = [all], frame_instant.png, 0, 0, 6.35, 8.89, 0, N
+  IMAGE = [all], frame_instant.png, 0, 0, 2.5, 3.5, 0, N
 ENDIF
 
 ; ============================================================
 ; CARD NAME — inside the gold banner at top
-; Left aligned, constrained width to avoid overlapping tags
 ; ============================================================
 FONT = Arial, 13, BT, #FFFFFF
-TEXT = [all], [Name], 0.45, 0.15, 3.5, 0.6, left, center
+TEXT = [all], [Name], 0.12, 0.04, 2.26, 0.22, center, center
 
 ; ============================================================
-; GAME TEXT — inside the large text box
-; Shifted Y to 5.4 so it sits inside the gold box
+; GAME TEXT — inside the large gold text box
 ; ============================================================
 FONT = Arial, 10, T, #FFFFFF
-TEXT = [all], [Game Text], 0.45, 5.4, 5.45, 2.6, left, wwtop
+TEXT = [all], [Game Text], 0.18, 2.05, 2.14, 0.87, left, wordwrap
 
 ; ============================================================
 ; FLAVOR TEXT — italic, below game text, only if non-empty
-; Shifted down slightly to accommodate game text
 ; ============================================================
 IF = [Flavor Text] <> ""
   FONT = Arial, 9, IT, #CCCCCC
-  TEXT = [all], [Flavor Text], 0.45, 7.4, 5.45, 0.65, left, wwtop
+  TEXT = [all], [Flavor Text], 0.18, 2.83, 2.14, 0.26, left, wordwrap
 ENDIF
 
 ; ============================================================
-; TYPE — bottom bar
+; TYPE — blue bar at very bottom
 ; ============================================================
 FONT = Arial, 11, BT, #FFFFFF
-TEXT = [all], [Type], 0, 8.25, 6.35, 0.5, center, center
+TEXT = [all], [Type], 0, 3.23, 2.5, 0.22, center, center
 
 ; ============================================================
-; TAG ICONS — upper right, Tag 1 rightmost
-; Positions aligned with the circular cutouts in the frame
+; TAG ICONS — upper right corner
+; Tag 1 is rightmost, Tag 2 to its left, etc.
+; Clean labels [tag1]..[tag4] avoid the space-in-name bug
 ; ============================================================
-[tag_y] = 0.22
-[tag_w] = 0.45
-[tag_h] = 0.45
-[tag_x1] = 5.55
-[tag_x2] = 5.05
-[tag_x3] = 4.55
-[tag_x4] = 4.05
+[tag_y] = 0.05
+[tag_w] = 0.18
+[tag_h] = 0.18
+[tag_x1] = 2.26
+[tag_x2] = 2.02
+[tag_x3] = 1.78
+[tag_x4] = 1.54
 
-; --- Tag 1 ---
-IF = [Tag 1] = bow
-  IMAGE = [all], bow.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = finesse
-  IMAGE = [all], finesse.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = fire
-  IMAGE = [all], fire.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = healing
-  IMAGE = [all], healing.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = ice
-  IMAGE = [all], ice.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = heavy_weapon
-  IMAGE = [all], heavy_weapon.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = instrument
-  IMAGE = [all], instrument.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = med_armor
-  IMAGE = [all], med_armor.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = light
-  IMAGE = [all], light.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = shield
-  IMAGE = [all], shield.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = pet
-  IMAGE = [all], pet.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 1] = theft
-  IMAGE = [all], theft.png, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CN
+IF = [tag1] <> ""
+  IMAGE = [all], "[tag1].png", [tag_x1], [tag_y], [tag_w], [tag_h], 0, CP
 ENDIF
 
-; --- Tag 2 ---
-IF = [Tag 2] = bow
-  IMAGE = [all], bow.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = finesse
-  IMAGE = [all], finesse.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = fire
-  IMAGE = [all], fire.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = healing
-  IMAGE = [all], healing.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = ice
-  IMAGE = [all], ice.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = heavy_weapon
-  IMAGE = [all], heavy_weapon.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = instrument
-  IMAGE = [all], instrument.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = med_armor
-  IMAGE = [all], med_armor.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = light
-  IMAGE = [all], light.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = shield
-  IMAGE = [all], shield.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = pet
-  IMAGE = [all], pet.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 2] = theft
-  IMAGE = [all], theft.png, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CN
+IF = [tag2] <> ""
+  IMAGE = [all], "[tag2].png", [tag_x2], [tag_y], [tag_w], [tag_h], 0, CP
 ENDIF
 
-; --- Tag 3 ---
-IF = [Tag 3] = bow
-  IMAGE = [all], bow.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = finesse
-  IMAGE = [all], finesse.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = fire
-  IMAGE = [all], fire.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = healing
-  IMAGE = [all], healing.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = ice
-  IMAGE = [all], ice.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = heavy_weapon
-  IMAGE = [all], heavy_weapon.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = instrument
-  IMAGE = [all], instrument.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = med_armor
-  IMAGE = [all], med_armor.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = light
-  IMAGE = [all], light.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = shield
-  IMAGE = [all], shield.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = pet
-  IMAGE = [all], pet.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 3] = theft
-  IMAGE = [all], theft.png, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CN
+IF = [tag3] <> ""
+  IMAGE = [all], "[tag3].png", [tag_x3], [tag_y], [tag_w], [tag_h], 0, CP
 ENDIF
 
-; --- Tag 4 ---
-IF = [Tag 4] = bow
-  IMAGE = [all], bow.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = finesse
-  IMAGE = [all], finesse.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = fire
-  IMAGE = [all], fire.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = healing
-  IMAGE = [all], healing.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = ice
-  IMAGE = [all], ice.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = heavy_weapon
-  IMAGE = [all], heavy_weapon.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = instrument
-  IMAGE = [all], instrument.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = med_armor
-  IMAGE = [all], med_armor.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = light
-  IMAGE = [all], light.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = shield
-  IMAGE = [all], shield.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = pet
-  IMAGE = [all], pet.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
-ELSEIF = [Tag 4] = theft
-  IMAGE = [all], theft.png, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CN
+IF = [tag4] <> ""
+  IMAGE = [all], "[tag4].png", [tag_x4], [tag_y], [tag_w], [tag_h], 0, CP
 ENDIF
