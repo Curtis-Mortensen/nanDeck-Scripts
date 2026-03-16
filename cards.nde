@@ -37,9 +37,17 @@ LINK = cards.xlsx
 [img_theft]        = theft.png
 
 ; ============================================================
+; This is necessary to create nested tags for the item type
+; ============================================================
+
+[label_Basic]   = Basic Item
+[label_Rare]    = Rare Item
+[label_Instant] = Instant Item
+
+; ============================================================
 ; CARD ILLUSTRATION
 ; ============================================================
-IMAGE = [all], [Hyperlink], 0.12, 0.26, 2.26, 1.7, 0, CN
+IMAGE = [all], [Hyperlink], 0.05, 0.26, 2.4, 2, 0, CN
 
 ; ============================================================
 ; FRAME OVERLAY
@@ -57,14 +65,14 @@ ENDIF
 ; ============================================================
 ; CARD NAME
 ; ============================================================
-FONT = Arial, 13, BT, #FFFFFF
-TEXT = [all], [Name], 0.12, 0.04, 2.26, 0.22, center, center
+FONT = Bahnschrift SemiBold, 11, BT, #FFFFFF
+TEXT = [all], [Name], 0.2, 0.1, 2.26, 0.22, left, center
 
 ; ============================================================
 ; GAME TEXT
 ; ============================================================
-FONT = Arial, 10, T, #FFFFFF
-TEXT = [all], [Game Text], 0.18, 2.05, 2.14, 0.87, left, wordwrap
+FONT = Bahnschrift Light, 10, T, #FFFFFF
+TEXT = [all], [Game Text], 0.3, 2.15, 2, 1, left, wordwrap
 
 ; ============================================================
 ; FLAVOR TEXT — conditional
@@ -77,19 +85,19 @@ ENDIF
 ; ============================================================
 ; TYPE
 ; ============================================================
-FONT = Arial, 11, BT, #FFFFFF
-TEXT = [all], [Type], 0, 3.23, 2.5, 0.22, center, center
+FONT = Bahnschrift SemiBold, 9, BT, #FFFFFF
+TEXT = [all], [label_[Type]], 0, 3.1, 2.5, 0.22, center, center
 
 ; ============================================================
 ; TAG ICONS
 ; ============================================================
-[tag_y]  = 0.05
-[tag_w]  = 0.18
-[tag_h]  = 0.18
-[tag_x1] = 2.26
-[tag_x2] = 2.02
-[tag_x3] = 1.78
-[tag_x4] = 1.54
+[tag_y]  = 0.08
+[tag_w]  = 0.3
+[tag_h]  = 0.3
+[tag_x1] = 2.1
+[tag_x2] = 1.85
+[tag_x3] = 1.6
+[tag_x4] = 1.35
 
 IF = [tag1] <> ""
   IMAGE = [all], [img_[tag1]], [tag_x1], [tag_y], [tag_w], [tag_h], 0, CP
