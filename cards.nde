@@ -1,5 +1,5 @@
 ; ============================================================
-; cards.nde
+; cards.nde  —  Fixed version
 ; Spreadsheet columns:
 ;   Name | Game Text | Flavor Text | Tag 1 | Tag 2 |
 ;   Tag 3 | Tag 4 | Type | Hyperlink
@@ -12,57 +12,56 @@ LINK = cards.xlsx
 [all] = 1-{(Name)}
 
 ; ============================================================
-; CARD ILLUSTRATION — fills the white window in the frame
-; Approx window: x=0.3, y=0.65, w=5.75, h=4.3
+; CARD ILLUSTRATION — fills the window in the frame
+; CN = Crop to fill (C) + PNG transparency (N)
 ; ============================================================
 IMAGE = [all], [Hyperlink], 0.3, 0.65, 5.75, 4.3, 0, CN
 
 ; ============================================================
-; FRAME OVERLAY — full card, PNG transparency, drawn on top
-; of illustration. Must come AFTER illustration.
+; FRAME OVERLAY — full card, drawn on top of illustration.
+; N flag = use PNG alpha transparency channel.
+; No quotes needed around the filename (no spaces).
 ; ============================================================
 IF = [Type] = Basic
   IMAGE = [all], frame_basic.png, 0, 0, 6.35, 8.89, 0, N
 ENDIF
-
 IF = [Type] = Rare
   IMAGE = [all], frame_rare.png, 0, 0, 6.35, 8.89, 0, N
 ENDIF
-
 IF = [Type] = Instant
   IMAGE = [all], frame_instant.png, 0, 0, 6.35, 8.89, 0, N
 ENDIF
 
 ; ============================================================
 ; CARD NAME — inside the gold banner at top
+; T flag = transparent font background (lets frame show through)
 ; ============================================================
 FONT = Arial, 13, BT, #FFFFFF
 TEXT = [all], [Name], 0.3, 0.1, 5.75, 0.55, center, center
 
 ; ============================================================
-; GAME TEXT — inside the large gold text box
+; GAME TEXT — inside the large text box
+; wwtop = word-wrap, anchored to top of rectangle
 ; ============================================================
 FONT = Arial, 10, T, #FFFFFF
-TEXT = [all], [Game Text], 0.45, 5.2, 5.45, 2.2, left, wordwrap
+TEXT = [all], [Game Text], 0.45, 5.2, 5.45, 2.2, left, wwtop
 
 ; ============================================================
 ; FLAVOR TEXT — italic, below game text, only if non-empty
 ; ============================================================
 IF = [Flavor Text] <> ""
   FONT = Arial, 9, IT, #CCCCCC
-  TEXT = [all], [Flavor Text], 0.45, 7.2, 5.45, 0.65, left, wordwrap
+  TEXT = [all], [Flavor Text], 0.45, 7.2, 5.45, 0.65, left, wwtop
 ENDIF
 
 ; ============================================================
-; TYPE — blue bar at very bottom
+; TYPE — bottom bar
 ; ============================================================
 FONT = Arial, 11, BT, #FFFFFF
 TEXT = [all], [Type], 0, 8.22, 6.35, 0.55, center, center
 
 ; ============================================================
 ; TAG ICONS — upper right, Tag 1 rightmost
-; Tag images: bow.png, fire.png, ice.png, etc.
-; Using explicit ELSEIF to avoid string concatenation issues
 ; ============================================================
 [tag_y] = 0.12
 [tag_w] = 0.45
