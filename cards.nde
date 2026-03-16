@@ -19,11 +19,18 @@ LINK = cards.xlsx
 [all] = 1-{(Name)}
 
 ; ============================================================
-; BACKGROUND FRAME IMAGE
-; C flag = fill/cover: maintains aspect ratio but enlarges
-; to fill the card, clipping edges. Centered by default.
+; CARD ART  — upper portion, cropped to fill
+; Adjust height (5.0) to match where your frame's text
+; area begins
 ; ============================================================
-IMAGE = [all], [Hyperlink], 0, 0, 6.35, 8.89, 0, C
+IMAGE = [all], [Hyperlink], 0, 0, 6.35, 5.0, 0, CN
+
+; ============================================================
+; FRAME  — static, same for all cards, exact card size
+; No flag needed — default stretches to fill exactly
+; Replace "frame.png" with your actual filename
+; ============================================================
+IMAGE = [all], "frame.png", 0, 0, 6.35, 8.89, 0, N
 
 ; ============================================================
 ; CARD NAME  — top left, white, bold
