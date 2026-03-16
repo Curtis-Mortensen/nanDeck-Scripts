@@ -1,0 +1,102 @@
+; ============================================================
+; cards.nde  —  place this file in the same folder as your
+;               spreadsheet and all image files
+; Spreadsheet columns:
+;   Name | Game Text | Flavor Text | Tag 1 | Tag 2 |
+;   Tag 3 | Tag 4 | Type | Hyperlink
+; ============================================================
+
+; --- Card size: US Poker (2.5" x 3.5") ---
+CARDSIZE = 6.35, 8.89
+
+; --- Page: A4, auto-arrange, draw cut lines ---
+PAGE = 21, 29.7, PORTRAIT, HV
+
+; --- Link spreadsheet (same folder, .xlsx or .csv) ---
+LINK = cards.xlsx
+
+; --- Range: all rows that have a Name ---
+[all] = 1-{(Name)}
+
+; ============================================================
+; BACKGROUND FRAME IMAGE
+; C flag = fill/cover: maintains aspect ratio but enlarges
+; to fill the card, clipping edges. Centered by default.
+; ============================================================
+IMAGE = [all], [Hyperlink], 0, 0, 6.35, 8.89, 0, C
+
+; ============================================================
+; CARD NAME  — top left, white, bold
+; ============================================================
+FONT = Arial, 16, BT, #FFFFFF
+TEXT = [all], [Name], 0.2, 0.2, 4.2, 0.7, left, center
+
+; ============================================================
+; TYPE BAR  — colored rectangle at bottom, with type label
+; Bar is 6.35cm wide x 0.65cm tall, sitting at the bottom
+; ============================================================
+
+; Basic = dark blue
+IF = [Type] = Basic
+  RECTANGLE = [all], 0, 8.24, 6.35, 0.65, #1A3A7A
+ENDIF
+
+; Rare = dark red
+IF = [Type] = Rare
+  RECTANGLE = [all], 0, 8.24, 6.35, 0.65, #7A1A1A
+ENDIF
+
+; Instant = dark green
+IF = [Type] = Instant
+  RECTANGLE = [all], 0, 8.24, 6.35, 0.65, #1A5C2A
+ENDIF
+
+; Type label — centered, white, bold
+FONT = Arial, 11, BT, #FFFFFF
+TEXT = [all], [Type], 0, 8.24, 6.35, 0.65, center, center
+
+; ============================================================
+; GAME TEXT  — middle body, white
+; ============================================================
+FONT = Arial, 10, T, #FFFFFF
+TEXT = [all], [Game Text], 0.25, 3.5, 5.85, 2.8, left, wordwrap
+
+; ============================================================
+; FLAVOR TEXT  — italic, white, below game text
+; Only rendered if the cell is non-empty
+; ============================================================
+IF = [Flavor Text] <> ""
+  FONT = Arial, 9, IT, #FFFFFF
+  TEXT = [all], [Flavor Text], 0.25, 6.4, 5.85, 1.0, left, wordwrap
+ENDIF
+
+; ============================================================
+; TAG ICONS  — upper right corner, icon images
+; Each tag icon is 0.55cm x 0.55cm
+; Tag 1 is rightmost (x=5.55), Tag 2 left of that, etc.
+; Tag image filenames match the tag name, e.g. "fire.png"
+; C flag = fill/cover within the icon box
+; ============================================================
+[tag_y]   = 0.2
+[tag_w]   = 0.55
+[tag_h]   = 0.55
+[tag_x1]  = 5.55
+[tag_x2]  = 4.9
+[tag_x3]  = 4.25
+[tag_x4]  = 3.6
+
+IF = [Tag 1] <> ""
+  IMAGE = [all], {[Tag 1]&".png"}, [tag_x1], [tag_y], [tag_w], [tag_h], 0, CP
+ENDIF
+
+IF = [Tag 2] <> ""
+  IMAGE = [all], {[Tag 2]&".png"}, [tag_x2], [tag_y], [tag_w], [tag_h], 0, CP
+ENDIF
+
+IF = [Tag 3] <> ""
+  IMAGE = [all], {[Tag 3]&".png"}, [tag_x3], [tag_y], [tag_w], [tag_h], 0, CP
+ENDIF
+
+IF = [Tag 4] <> ""
+  IMAGE = [all], {[Tag 4]&".png"}, [tag_x4], [tag_y], [tag_w], [tag_h], 0, CP
+ENDIF
