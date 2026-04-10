@@ -2,7 +2,7 @@ UNIT = INCH
 
 CARDSIZE = 2.5, 3.5
 PAGE = 8.5, 11, PORTRAIT, HV
-LINK = cards.xlsx
+LINK = cards.xlsx!Completed
 
 [all] = 1-{(Name)}
 
@@ -43,6 +43,7 @@ LINK = cards.xlsx
 [label_Basic]   = Basic Item
 [label_Rare]    = Rare Item
 [label_Instant] = Instant Item
+[label_Rare-Instant] = Instant Item
 
 ; ============================================================
 ; CARD ILLUSTRATION
