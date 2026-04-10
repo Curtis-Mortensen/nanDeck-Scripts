@@ -43,7 +43,7 @@ LINK = cards.xlsx!Completed
 [label_Basic]   = Basic Item
 [label_Rare]    = Rare Item
 [label_Instant] = Instant Item
-[label_Rare-Instant] = Instant Item
+[label_Rare-Instant] = Rare-Instant Item
 
 ; ============================================================
 ; CARD ILLUSTRATION
