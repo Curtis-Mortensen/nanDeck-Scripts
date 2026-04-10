@@ -62,6 +62,9 @@ ENDIF
 IF = [Type] = Instant
   IMAGE = [all], frame_instant.png, 0, 0, 2.5, 3.5, 0, N
 ENDIF
+IF = [Type] = Rare-Instant
+  IMAGE = [all], frame_rare.png, 0, 0, 2.5, 3.5, 0, N
+ENDIF
 
 ; ============================================================
 ; CARD NAME
